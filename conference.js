@@ -1347,163 +1347,9 @@ const programCommitteeMembers = [
     }
 ];
 
-// National Registration data
-const nationalRegistration = [
-    {
-        type: "IEEE Member",
-        price: "6,000.00",
-        currency: "BDT",
-        features: [
-            "Conference Access",
-            "Lunch & Coffee Breaks",
-            "Conference Materials",
-            "Certificate of Participation",
-            "Conference Kit and Proceedings"
-        ]
-    },
-    {
-        type: "Non-IEEE Member",
-        price: "8,000.00",
-        currency: "BDT",
-        features: [
-            "Conference Access",
-            "Lunch & Coffee Breaks",
-            "Conference Materials",
-            "Certificate of Participation",
-            "Conference Kit and Proceedings"
-        ]
-    },
-    {
-        type: "Student Author",
-        subtitle: "(IEEE Member)",
-        price: "5,000.00",
-        currency: "BDT",
-        features: [
-            "Conference Access",
-            "Lunch & Coffee Breaks",
-            "Conference Materials",
-            "Certificate of Participation",
-            "Conference Kit and Proceedings"
-        ]
-    },
-    {
-        type: "Student Author",
-        subtitle: "(Non-IEEE Member)",
-        price: "5,500.00",
-        currency: "BDT",
-        features: [
-            "Conference Access",
-            "Lunch & Coffee Breaks",
-            "Conference Materials",
-            "Certificate of Participation",
-            "Conference Kit and Proceedings"
-        ]
-    },
-    {
-        type: "Workshop Paper and Poster",
-        subtitle: "(Abstract only)",
-        price: "5,000.00",
-        currency: "BDT",
-        features: [
-            "Conference Access",
-            "Lunch & Coffee Breaks",
-            "Conference Materials",
-            "Certificate of Participation",
-            "Conference Kit and Proceedings"
-        ]
-    },
-    {
-        type: "Non-Author Participant",
-        price: "5,500.00",
-        currency: "BDT",
-        features: [
-            "Conference Access",
-            "Lunch & Coffee Breaks",
-            "Conference Materials",
-            "Certificate of Participation",
-            "Conference Kit and Proceedings"
-        ]
-    }
-];
 
-// International Registration data
-const internationalRegistration = [
-    {
-        type: "IEEE Member",
-        price: "80.00",
-        currency: "USD",
-        features: [
-            "Conference Access",
-            "Lunch & Coffee Breaks",
-            "Conference Materials",
-            "Certificate of Participation",
-            "Conference Kit and Proceedings"
-        ]
-    },
-    {
-        type: "Non-IEEE Member",
-        price: "100.00",
-        currency: "USD",
-        features: [
-            "Conference Access",
-            "Lunch & Coffee Breaks",
-            "Conference Materials",
-            "Certificate of Participation",
-            "Conference Kit and Proceedings"
-        ]
-    },
-    {
-        type: "Student Author",
-        subtitle: "(IEEE Member)",
-        price: "70.00",
-        currency: "USD",
-        features: [
-            "Conference Access",
-            "Lunch & Coffee Breaks",
-            "Conference Materials",
-            "Certificate of Participation",
-            "Conference Kit and Proceedings"
-        ]
-    },
-    {
-        type: "Student Author",
-        subtitle: "(Non-IEEE Member)",
-        price: "75.00",
-        currency: "USD",
-        features: [
-            "Conference Access",
-            "Lunch & Coffee Breaks",
-            "Conference Materials",
-            "Certificate of Participation",
-            "Conference Kit and Proceedings"
-        ]
-    },
-    {
-        type: "Workshop Paper and Poster",
-        subtitle: "(Abstract only)",
-        price: "70.00",
-        currency: "USD",
-        features: [
-            "Conference Access",
-            "Lunch & Coffee Breaks",
-            "Conference Materials",
-            "Certificate of Participation",
-            "Conference Kit and Proceedings"
-        ]
-    },
-    {
-        type: "Non-Author Participant",
-        price: "75.00",
-        currency: "USD",
-        features: [
-            "Conference Access",
-            "Lunch & Coffee Breaks",
-            "Conference Materials",
-            "Certificate of Participation",
-            "Conference Kit and Proceedings"
-        ]
-    }
-];
+
+
 
 // Initialize the website
 document.addEventListener('DOMContentLoaded', function() {
@@ -1521,14 +1367,11 @@ document.addEventListener('DOMContentLoaded', function() {
         initializeNavigation();
         initializeProgramTabs();
         initializeCommitteeTabs();
-        initializeRegistrationTabs();
         loadSpeakers();
         loadOrganizingCommittee();
         loadTechnicalProgramCommittee();
         loadAdvisoryCommittee();
         loadProgramCommitteeMembers();
-        loadRegistrationOptions('national');
-        loadRegistrationOptions('international');
         initializeForms();
         initializeScrollEffects();
         initializeModal();
@@ -2139,61 +1982,9 @@ function loadProgramCommitteeMembers() {
 
 
 
-// Load registration options dynamically
-function loadRegistrationOptions(type) {
-    const registrationData = type === 'national' ? nationalRegistration : internationalRegistration;
-    const containerId = type === 'national' ? 'nationalRegistrationContainer' : 'internationalRegistrationContainer';
-    const container = document.getElementById(containerId);
-    
-    if (!container) return;
-    
-    container.innerHTML = '';
-    
-    registrationData.forEach(option => {
-        const card = document.createElement('div');
-        card.className = `pricing-card${option.featured ? ' featured' : ''}`;
-        
-        const featuresHTML = option.features.map(feature => `<li>${feature}</li>`).join('');
-        const subtitleHTML = option.subtitle ? `<p class="pricing-subtitle">${option.subtitle}</p>` : '';
-        
-        card.innerHTML = `
-            <h3>${option.type}</h3>
-            ${subtitleHTML}
-            <div class="price">${option.currency === 'BDT' ? '৳' : '$'}${option.price}</div>
-            <ul class="features">
-                ${featuresHTML}
-            </ul>
-            <button class="btn ${option.featured ? 'btn-primary' : 'btn-outline'}" onclick="openRegistrationModal('${option.type.toLowerCase().replace(/\s+/g, '-')}')">
-                Register
-            </button>
-        `;
-        
-        container.appendChild(card);
-    });
-}
 
-// Initialize registration tabs
-function initializeRegistrationTabs() {
-    const registrationTabs = document.querySelectorAll('.registration-tab-btn');
-    const registrationGroups = document.querySelectorAll('.registration-content .registration-group');
-    
-    registrationTabs.forEach(tab => {
-        tab.addEventListener('click', function() {
-            const targetType = this.getAttribute('data-registration');
-            
-            // Remove active class from all tabs and groups
-            registrationTabs.forEach(t => t.classList.remove('active'));
-            registrationGroups.forEach(g => g.classList.remove('active'));
-            
-            // Add active class to clicked tab and corresponding group
-            this.classList.add('active');
-            const targetGroup = document.querySelector(`.registration-group[data-registration="${targetType}"]`);
-            if (targetGroup) {
-                targetGroup.classList.add('active');
-            }
-        });
-    });
-}
+
+
 
 // Load committees dynamically
 // Commented out - using static data instead of API

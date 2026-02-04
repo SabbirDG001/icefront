@@ -2165,14 +2165,7 @@ section {
     position: relative;
 }
 
-.registration-content .registration-group {
-    display: none;
-}
 
-.registration-content .registration-group.active {
-    display: block;
-    animation: fadeIn 0.4s ease;
-}
 
 .registration-info {
     margin-top: 4rem;
@@ -3233,3 +3226,74 @@ html {
     color: #991b1b;
     border: 1px solid #fca5a5;
 }
+
+
+/* Registration Fees Table Styles */
+.table-container {
+    width: 700px;
+    background: #d9d2f0;
+    padding: 10px;
+    border-radius: 6px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+    margin: 20px auto; /* Added margin for centering and spacing */
+}
+
+.registration-content .table-container {
+    max-width: 700px; /* Constrain width within existing container */
+    margin: 40px auto; /* Center the table within the content area */
+}
+
+.registration-content table { /* Targeting the table within registration-content */
+    width: 100%;
+    border-collapse: collapse;
+    background: #c9c3ee;
+}
+
+.registration-content th, 
+.registration-content td { /* Targeting th, td within registration-content */
+    border: 1px solid #ffffff;
+    padding: 10px 12px;
+    text-align: center;
+    font-size: 16px;
+}
+
+.registration-content th { /* Targeting th within registration-content */
+    background: #b7aedc;
+    font-weight: bold;
+    font-size: 17px;
+}
+
+.registration-content td:first-child { /* Targeting first td within registration-content */
+    text-align: left;
+    padding-left: 15px;
+    font-weight: 500;
+}
+
+.registration-content tr:nth-child(even) td { /* Targeting even rows within registration-content */
+    background: #d6d0f5;
+}
+
+.registration-content tr:nth-child(odd) td { /* Targeting odd rows within registration-content */
+    background: #c7c0ef;
+}
+
+.registration-content caption { /* Targeting caption within registration-content */
+    caption-side: bottom;
+    padding-top: 8px;
+    font-size: 14px;
+    color: #444;
+}
+
+/* Mobile Responsive for Registration Fees Table */
+@media (max-width: 600px) {
+    .registration-content .table-container {
+        width: 100%;
+    }
+
+    .registration-content th, 
+    .registration-content td { /* Targeting th, td within registration-content */
+        font-size: 14px;
+        padding: 8px;
+    }
+}
+
