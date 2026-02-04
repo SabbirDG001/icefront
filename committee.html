@@ -126,15 +126,8 @@
             </li>
             <li><a href="scopes.html" class="nav-link">Scopes</a></li>
                         <li><a href="program.html" class="nav-link">Programs</a></li>
-                        <li class="nav-item">
-                            <a href="#" class="nav-link active">Committee <i class="fas fa-chevron-down" style="font-size: 0.8em;"></i></a>
-                            <ul class="submenu">
-                                <li><a href="committee.html">Organizing Committee</a></li>
-                                <li><a href="speakers.html">Speakers</a></li>
-                                <li><a href="reviewers.html">PC Members</a></li>
-                            </ul>
-                        </li>
-            <li><a href="submission.html" class="nav-link">Submission</a></li>
+                                    <li><a href="speakers.html" class="nav-link">Speakers</a></li>
+                                                <li><a href="committee.html" class="nav-link active">Committee</a></li>            <li><a href="submission.html" class="nav-link">Submission</a></li>
             <li>
               <a href="registration.html" class="nav-link">Registration</a>
             </li>
@@ -170,6 +163,9 @@
           </button>
           <button class="committee-tab-btn" data-committee="advisory">
             International Advisory Committee
+          </button>
+          <button class="committee-tab-btn" data-committee="pc-members">
+            PC Members
           </button>
         </div>
 
@@ -257,6 +253,22 @@
               <button class="pagination-btn" id="advisoryNextBtn">
                 Next <i class="fas fa-chevron-right"></i>
               </button>
+            </div>
+          </div>
+          <div class="committee-group" data-committee="pc-members">
+            <div class="advisory-committee-list" id="programCommitteeMembersContainer">
+              <!-- Loaded by JS -->
+            </div>
+            <div class="pagination-container" id="pcMembersPaginationContainer" style="display: none;">
+                <button class="pagination-btn" id="pcMembersPrevBtn">
+                    <i class="fas fa-chevron-left"></i> Previous
+                </button>
+                <div class="pagination-info">
+                    Page <span id="pcMembersCurrentPage">1</span> of <span id="pcMembersTotalPages">1</span>
+                </div>
+                <button class="pagination-btn" id="pcMembersNextBtn">
+                    Next <i class="fas fa-chevron-right"></i>
+                </button>
             </div>
           </div>
         </div>
