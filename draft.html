@@ -1,0 +1,268 @@
+    <section id="registration" class="registration">
+        <div class="container">
+            <div class="section-header">
+                <h2>Registration</h2>
+                <p>Join us for this exciting conference and network with leading researchers in the field.</p>
+            </div>
+            
+            <!-- Registration Tabs -->
+            <div class="registration-tabs">
+                <button class="registration-tab-btn active" data-registration="national">National (BDT)</button>
+                <button class="registration-tab-btn" data-registration="international">International (USD)</button>
+            </div>
+            
+            <!-- Registration Content -->
+            <div class="registration-content">
+                <div class="registration-group active" data-registration="national">
+                    <div class="pricing-cards" id="nationalRegistrationContainer">
+                        <!-- National registration options will be loaded dynamically -->
+                    </div>
+                </div>
+                <div class="registration-group" data-registration="international">
+                    <div class="pricing-cards" id="internationalRegistrationContainer">
+                        <!-- International registration options will be loaded dynamically -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+
+
+    /* Registration Section */
+.registration {
+    background: #f8fafc;
+}
+
+.registration-tabs {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 1rem;
+    margin-bottom: 3rem;
+    padding: 0 1rem;
+}
+
+.registration-tab-btn {
+    padding: 14px 40px;
+    border: 2px solid #e5e7eb;
+    background: white;
+    color: #64748b;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-weight: 700;
+    font-size: 1.05rem;
+    white-space: nowrap;
+    letter-spacing: 0.5px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+.registration-tab-btn.active {
+    border-color: #1e40af;
+    background: linear-gradient(135deg, #1e40af, #3b82f6);
+    color: white;
+    box-shadow: 0 4px 16px rgba(30, 64, 175, 0.3);
+    transform: translateY(-2px);
+}
+
+.registration-tab-btn:hover {
+    border-color: #1e40af;
+    background: #1e40af;
+    color: white;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 16px rgba(30, 64, 175, 0.2);
+}
+
+.registration-content {
+    position: relative;
+}
+
+.registration-content .registration-group {
+    display: none;
+}
+
+.registration-content .registration-group.active {
+    display: block;
+    animation: fadeIn 0.4s ease;
+}
+
+.registration-info {
+    margin-top: 4rem;
+    background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%);
+    padding: 2.5rem;
+    border-radius: 16px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+    border: 1px solid #e5e7eb;
+}
+
+.registration-info h3 {
+    font-size: 1.75rem;
+    font-weight: 700;
+    color: #1e40af;
+    margin-bottom: 1.5rem;
+    padding-bottom: 1rem;
+    border-bottom: 3px solid #1e40af;
+    display: inline-block;
+}
+
+.registration-info ul {
+    list-style: none;
+    color: #475569;
+    line-height: 1.8;
+    padding-left: 0;
+}
+
+.registration-info ul li {
+    margin-bottom: 1rem;
+    padding-left: 2rem;
+    position: relative;
+    font-size: 1rem;
+}
+
+.registration-info ul li::before {
+    content: '•';
+    position: absolute;
+    left: 0.5rem;
+    color: #1e40af;
+    font-size: 1.5rem;
+    line-height: 1;
+}
+
+.pricing-subtitle {
+    font-size: 0.9rem;
+    color: #666;
+    margin-top: -0.5rem;
+    margin-bottom: 1rem;
+}
+
+.pricing-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 2rem;
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
+.pricing-card {
+    background: white;
+    padding: 2.5rem 2rem;
+    border-radius: 16px;
+    text-align: center;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+    transition: all 0.3s ease;
+    position: relative;
+    border: 2px solid #e5e7eb;
+    display: flex;
+    flex-direction: column;
+}
+
+.pricing-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 12px 40px rgba(30, 64, 175, 0.15);
+    border-color: #1e40af;
+}
+
+.pricing-card.featured {
+    border: 3px solid #1e40af;
+    background: linear-gradient(135deg, #ffffff 0%, #eff6ff 100%);
+    transform: scale(1.03);
+    box-shadow: 0 8px 30px rgba(30, 64, 175, 0.2);
+}
+
+.pricing-card.featured:hover {
+    transform: scale(1.03) translateY(-8px);
+    box-shadow: 0 16px 50px rgba(30, 64, 175, 0.25);
+}
+
+.pricing-card.featured::before {
+    content: 'Most Popular';
+    position: absolute;
+    top: -15px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: linear-gradient(135deg, #1e40af, #3b82f6);
+    color: white;
+    padding: 6px 24px;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    box-shadow: 0 4px 12px rgba(30, 64, 175, 0.3);
+}
+
+.pricing-card h3 {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #1e40af;
+    margin-bottom: 0.5rem;
+    min-height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.pricing-subtitle {
+    font-size: 0.85rem;
+    color: #64748b;
+    margin-top: -0.5rem;
+    margin-bottom: 1rem;
+    font-style: italic;
+    min-height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.price {
+    font-size: 3rem;
+    font-weight: 800;
+    color: #1e40af;
+    margin: 1.5rem 0;
+    line-height: 1;
+    letter-spacing: -1px;
+}
+
+.pricing-card.featured .price {
+    color: #1e40af;
+    font-size: 3.25rem;
+}
+
+.features {
+    list-style: none;
+    margin: 1.5rem 0;
+    flex-grow: 1;
+    text-align: left;
+}
+
+.features li {
+    padding: 0.75rem 0;
+    color: #475569;
+    border-bottom: 1px solid #f1f5f9;
+    display: flex;
+    align-items: flex-start;
+    gap: 0.75rem;
+    font-size: 0.95rem;
+}
+
+.features li:last-child {
+    border-bottom: none;
+}
+
+.features li::before {
+    content: '✓';
+    color: #10b981;
+    font-weight: bold;
+    font-size: 1.1rem;
+    flex-shrink: 0;
+}
+
+.pricing-card .btn {
+    margin-top: 1.5rem;
+    width: 100%;
+    padding: 14px;
+    font-size: 1rem;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+}

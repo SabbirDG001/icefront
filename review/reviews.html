@@ -1,0 +1,788 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Distinguished Academic Voices — Ceremony of Excellence</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet"/>
+  <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+
+  <style>
+    :root {
+      --bg: #f8f9fa;
+      --white: #ffffff;
+      --primary: #2045B5;
+      --primary-light: #2d5a8e;
+      --accent: #c81010;
+      --text: #1c1c1e;
+      --text-secondary: #4a4a4a;
+      --text-muted: #6b7280;
+      --border: #d1d5db;
+      --border-light: #e5e7eb;
+      --star: #d97706;
+      --shadow-sm: 0 1px 3px rgba(0,0,0,0.08), 0 1px 2px rgba(0,0,0,0.04);
+      --shadow-md: 0 4px 12px rgba(0,0,0,0.08), 0 2px 4px rgba(0,0,0,0.04);
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Inter', sans-serif;
+      font-size: 15px;
+      line-height: 1.6;
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    /* ---- HEADER ---- */
+    .site-header {
+      background: var(--primary);
+      color: #fff;
+      padding: 0;
+      border-bottom: 3px solid var(--accent);
+    }
+
+    .header-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 36px 40px 32px;
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      gap: 24px;
+      flex-wrap: wrap;
+    }
+
+    .header-logo {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .logo-icon {
+      width: 48px; height: 48px;
+      background: rgba(255,255,255,0.12);
+      border: 1px solid rgba(255,255,255,0.2);
+      border-radius: 4px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 22px;
+      flex-shrink: 0;
+    }
+
+    .logo-text h1 {
+      font-family: 'Source Serif 4', serif;
+      font-size: 2.1rem;
+      font-weight: 700;
+      letter-spacing: 0.01em;
+      color: #fff;
+      line-height: 1.2;
+    }
+
+    .logo-text p {
+      font-size: 1rem;
+      color: rgba(255,255,255,0.65);
+      letter-spacing: 0.04em;
+      margin-top: 2px;
+    }
+
+    .header-meta {
+      text-align: right;
+      font-size: 12px;
+      color: rgba(255,255,255,0.6);
+      letter-spacing: 0.03em;
+    }
+    .header-meta strong { display: block; color: rgba(255,255,255,0.9); font-size: 13px; margin-bottom: 2px; }
+
+    /* ---- STATS BAR ---- */
+    .stats-bar {
+      background: var(--white);
+      border-bottom: 1px solid var(--border-light);
+      box-shadow: var(--shadow-sm);
+    }
+    .stats-bar-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 40px;
+      display: flex;
+      align-items: stretch;
+    }
+    .stat-item {
+      padding: 20px 40px 20px 0;
+      margin-right: 40px;
+      border-right: 1px solid var(--border-light);
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+    .stat-item:last-child { border-right: none; }
+    .stat-num {
+      font-family: 'Source Serif 4', serif;
+      font-size: 30px;
+      font-weight: 700;
+      color: var(--primary);
+      line-height: 1;
+    }
+    .stat-label {
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      line-height: 1.3;
+    }
+
+    /* ---- MAIN LAYOUT ---- */
+    .main-wrap {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 40px 40px 80px;
+    }
+
+    /* ---- SECTION HEADER ---- */
+    .section-header {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      border-bottom: 2px solid var(--primary);
+      padding-bottom: 10px;
+      margin-bottom: 28px;
+    }
+
+    .section-title {
+      font-family: 'Source Serif 4', serif;
+      font-size: 20px;
+      font-weight: 700;
+      color: var(--primary);
+      letter-spacing: 0.01em;
+    }
+
+    .section-count {
+      font-size: 12px;
+      color: var(--text-muted);
+      font-weight: 500;
+    }
+
+    /* ---- FILTER BAR ---- */
+    .filter-bar {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 28px;
+    }
+
+    .filter-btn {
+      font-family: 'Inter', sans-serif;
+      font-size: 12px;
+      font-weight: 500;
+      color: var(--text-secondary);
+      background: var(--white);
+      border: 1px solid var(--border);
+      padding: 6px 14px;
+      border-radius: 3px;
+      cursor: pointer;
+      transition: all 0.15s;
+    }
+    .filter-btn:hover { border-color: var(--primary-light); color: var(--primary); }
+    .filter-btn.active {
+      background: var(--primary);
+      border-color: var(--primary);
+      color: #fff;
+    }
+
+    /* ---- GRID ---- */
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+      gap: 20px;
+      margin-bottom: 60px;
+    }
+
+    .card {
+      background: var(--white);
+      border: 1px solid var(--border-light);
+      border-top: 3px solid var(--primary);
+      padding: 28px 28px 24px;
+      box-shadow: var(--shadow-sm);
+      display: flex;
+      flex-direction: column;
+      transition: box-shadow 0.2s, transform 0.2s;
+      animation: fadeSlideUp 0.4s ease both;
+    }
+    .card:hover {
+      box-shadow: var(--shadow-md);
+      transform: translateY(-2px);
+    }
+
+    .card-header {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      margin-bottom: 16px;
+    }
+
+    .stars { display: flex; gap: 2px; }
+    .star { font-size: 13px; color: var(--star); }
+    .star.empty { color: #d1d5db; }
+
+    .card-flag { font-size: 20px; line-height: 1; }
+
+    .card-body {
+      font-family: 'Source Serif 4', serif;
+      font-size: 15px;
+      line-height: 1.7;
+      color: var(--text-secondary);
+      font-style: italic;
+      flex: 1;
+      margin-bottom: 20px;
+      padding-left: 12px;
+      border-left: 2px solid var(--border-light);
+    }
+
+    .card-footer {
+      border-top: 1px solid var(--border-light);
+      padding-top: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+    }
+
+    /* .card-info {} */
+    .card-name {
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--text);
+      letter-spacing: 0.01em;
+    }
+    .card-role {
+      font-size: 12px;
+      color: var(--primary-light);
+      margin-top: 2px;
+      font-weight: 500;
+    }
+    .card-uni {
+      font-size: 11px;
+      color: var(--text-muted);
+      margin-top: 2px;
+    }
+
+    .card-country-badge {
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      white-space: nowrap;
+      text-align: right;
+    }
+
+    .empty-state {
+      grid-column: 1 / -1;
+      text-align: center;
+      padding: 60px 40px;
+      color: var(--text-muted);
+      font-size: 15px;
+      font-style: italic;
+    }
+
+    /* ---- FORM ---- */
+    .form-section {
+      background: var(--white);
+      border: 1px solid var(--border-light);
+      border-top: 3px solid var(--accent);
+      box-shadow: var(--shadow-sm);
+      padding: 40px;
+    }
+
+    .form-title {
+      font-family: 'Source Serif 4', serif;
+      font-size: 20px;
+      font-weight: 700;
+      color: var(--primary);
+      border-bottom: 2px solid var(--primary);
+      padding-bottom: 10px;
+      margin-bottom: 6px;
+    }
+
+    .form-subtitle {
+      font-size: 13px;
+      color: var(--text-muted);
+      margin-bottom: 28px;
+    }
+
+    .form-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+
+    .field {
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+    }
+    .field.full { grid-column: 1 / -1; }
+
+    label {
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--text-secondary);
+      letter-spacing: 0.02em;
+    }
+
+    input, select, textarea {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: 3px;
+      color: var(--text);
+      font-family: 'Inter', sans-serif;
+      font-size: 14px;
+      padding: 9px 12px;
+      outline: none;
+      transition: border-color 0.15s, box-shadow 0.15s;
+      width: 100%;
+    }
+    input:focus, select:focus, textarea:focus {
+      border-color: var(--primary-light);
+      box-shadow: 0 0 0 3px rgba(45,90,142,0.1);
+    }
+    input::placeholder, textarea::placeholder { color: #9ca3af; }
+    textarea { resize: vertical; min-height: 110px; }
+    select option { background: #fff; color: var(--text); }
+
+    /* Rating */
+    .rating-group { display: flex; gap: 6px; align-items: center; padding: 4px 0; }
+    .rating-star {
+      font-size: 24px;
+      cursor: pointer;
+      color: #d1d5db;
+      transition: color 0.15s, transform 0.15s;
+      line-height: 1;
+    }
+    .rating-star.active { color: var(--star); }
+    .rating-star:hover { transform: scale(1.1); }
+
+    .submit-btn {
+      margin-top: 20px;
+      padding: 11px 32px;
+      background: var(--primary);
+      border: none;
+      border-radius: 3px;
+      color: #fff;
+      font-family: 'Inter', sans-serif;
+      font-size: 14px;
+      font-weight: 600;
+      letter-spacing: 0.02em;
+      cursor: pointer;
+      transition: background 0.15s;
+    }
+    .submit-btn:hover { background: var(--primary-light); }
+    .submit-btn:disabled { opacity: 0.55; cursor: not-allowed; }
+
+    .form-note {
+      font-size: 12px;
+      color: var(--text-muted);
+      margin-top: 10px;
+    }
+
+    /* ---- TOAST ---- */
+    #toast {
+      position: fixed;
+      bottom: 32px; left: 50%; transform: translateX(-50%) translateY(60px);
+      background: var(--text);
+      color: #fff;
+      padding: 12px 28px;
+      border-radius: 4px;
+      font-size: 13px;
+      font-weight: 500;
+      z-index: 9999;
+      opacity: 0;
+      transition: all 0.3s;
+      pointer-events: none;
+      white-space: nowrap;
+    }
+    #toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+    #toast.success { background: #166534; }
+    #toast.error { background: #991b1b; }
+
+    /* ---- FOOTER ---- */
+    footer {
+      background: var(--primary);
+      color: rgba(255,255,255,0.6);
+      text-align: center;
+      padding: 24px 40px;
+      font-size: 12px;
+      letter-spacing: 0.04em;
+      border-top: 3px solid var(--accent);
+    }
+    footer strong { color: rgba(255,255,255,0.85); }
+
+    /* ---- ANIMATIONS ---- */
+    @keyframes fadeSlideUp {
+      from { opacity: 0; transform: translateY(16px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; } to { opacity: 1; }
+    }
+
+    /* ---- RESPONSIVE ---- */
+    @media (max-width: 720px) {
+      .header-inner { padding: 24px 20px 20px; }
+      .main-wrap { padding: 28px 20px 60px; }
+      .form-grid { grid-template-columns: 1fr; }
+      .field.full { grid-column: 1; }
+      .grid { grid-template-columns: 1fr; }
+      .stats-bar-inner { flex-wrap: wrap; padding: 0 20px; }
+      .stat-item { border-right: none; padding: 16px 0; margin-right: 0; width: 50%; }
+      .form-section { padding: 24px 20px; }
+    }
+  </style>
+</head>
+<body>
+<div class="page-wrap">
+
+  <!-- HEADER -->
+  <header class="site-header">
+    <div class="header-inner">
+      <div class="header-logo">
+        <div class="logo-icon">🎓</div>
+        <div class="logo-text">
+          <h1>Distinguished Academic Voices</h1>
+          <p>ICEFronT: IEEE International Conference on Engineering and Frontier Technologies 2026</p>
+        </div>
+      </div>
+      <div class="header-meta">
+        <strong>Ceremony of Excellence</strong>
+        Testimonials from global university professors
+      </div>
+    </div>
+  </header>
+
+  <!-- STATS BAR -->
+  <div class="stats-bar">
+    <div class="stats-bar-inner">
+      <div class="stat-item">
+        <div class="stat-num" id="stat-total">—</div>
+        <div class="stat-label">Total<br>Testimonials</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-num" id="stat-countries">—</div>
+        <div class="stat-label">Countries<br>Represented</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-num" id="stat-avg">—</div>
+        <div class="stat-label">Average<br>Rating</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- MAIN CONTENT -->
+  <main class="main-wrap">
+
+    <!-- Testimonials -->
+    <div class="section-header">
+      <h2 class="section-title">Professor Testimonials</h2>
+      <span class="section-count" id="section-count"></span>
+    </div>
+
+    <!-- Filters -->
+    <div class="filter-bar" id="filter-bar">
+      <button class="filter-btn active" data-filter="all" onclick="setFilter('all',this)">All Countries</button>
+    </div>
+
+    <!-- Grid -->
+    <div class="grid" id="grid"></div>
+
+    <!-- Submit Review Form -->
+    <div class="section-header">
+      <h2 class="section-title">Submit Your Review</h2>
+    </div>
+    <div class="form-section">
+      <p class="form-subtitle">Complete the form below to submit your testimonial. Your review will be forwarded to the ceremony committee via email.</p>
+
+      <div class="form-grid">
+        <div class="field">
+          <label for="f-name">Full Name *</label>
+          <input type="text" id="f-name" placeholder="e.g. Prof. Jane Smith" />
+        </div>
+        <div class="field">
+          <label for="f-email">Email Address *</label>
+          <input type="email" id="f-email" placeholder="e.g. j.smith@university.edu" />
+        </div>
+        <div class="field">
+          <label for="f-designation">Designation *</label>
+          <input type="text" id="f-designation" placeholder="e.g. Professor of Physics" />
+        </div>
+        <div class="field">
+          <label for="f-university">University *</label>
+          <input type="text" id="f-university" placeholder="e.g. University of Cambridge" />
+        </div>
+        <div class="field">
+          <label for="f-country">Country *</label>
+          <input type="text" id="f-country" placeholder="e.g. United Kingdom" />
+        </div>
+        <div class="field">
+          <label>Rating (1–5) *</label>
+          <div class="rating-group" id="rating-group">
+            <span class="rating-star" data-val="1">★</span>
+            <span class="rating-star" data-val="2">★</span>
+            <span class="rating-star" data-val="3">★</span>
+            <span class="rating-star" data-val="4">★</span>
+            <span class="rating-star" data-val="5">★</span>
+          </div>
+          <input type="hidden" id="f-rating" value="0" />
+        </div>
+        <div class="field full">
+          <label for="f-review">Your Review *</label>
+          <textarea id="f-review" rows="5" placeholder="Share your thoughts on the ceremony and its significance to the academic community..."></textarea>
+        </div>
+      </div>
+
+      <button class="submit-btn" id="submit-btn" onclick="sendReview()">Submit Review</button>
+      <p class="form-note">* All fields are required. Your submission will be sent to the ceremony committee.</p>
+    </div>
+
+  </main>
+
+  <!-- FOOTER -->
+  <footer>
+    <strong style="font-size: 1rem;">ICEFronT: IEEE International Conference on Engineering and Frontier Technologies 2026</strong><br>
+    International Academic Recognition Programme
+  </footer>
+
+</div>
+
+<!-- TOAST -->
+<div id="toast"></div>
+
+<script>
+  // ---- CONFIG: Replace with your EmailJS credentials ----
+  const EMAILJS_PUBLIC_KEY   = 'YOUR_PUBLIC_KEY';   // e.g. 'user_xxxxxxxxxxxxxxxx'
+  const EMAILJS_SERVICE_ID   = 'YOUR_SERVICE_ID';   // e.g. 'service_xxxxxxx'
+  const EMAILJS_TEMPLATE_ID  = 'YOUR_TEMPLATE_ID';  // e.g. 'template_xxxxxxx'
+  const RECIPIENT_EMAIL      = 'committee@university.edu'; // destination email
+
+  // ---- Init EmailJS ----
+  emailjs.init(EMAILJS_PUBLIC_KEY);
+
+  // ---- Country → Flag emoji ----
+  const countryFlags = {
+    'Italy': '🇮🇹', 'Japan': '🇯🇵', 'Ghana': '🇬🇭', 'Russia': '🇷🇺',
+    'Mexico': '🇲🇽', 'India': '🇮🇳', 'USA': '🇺🇸', 'United States': '🇺🇸',
+    'UK': '🇬🇧', 'United Kingdom': '🇬🇧', 'Germany': '🇩🇪', 'France': '🇫🇷',
+    'China': '🇨🇳', 'Brazil': '🇧🇷', 'Canada': '🇨🇦', 'Australia': '🇦🇺',
+    'Spain': '🇪🇸', 'South Korea': '🇰🇷', 'Egypt': '🇪🇬', 'Nigeria': '🇳🇬',
+    'Pakistan': '🇵🇰', 'Bangladesh': '🇧🇩', 'Turkey': '🇹🇷', 'Iran': '🇮🇷',
+    'Argentina': '🇦🇷', 'Sweden': '🇸🇪', 'Netherlands': '🇳🇱', 'Poland': '🇵🇱',
+  };
+
+  function getFlag(country) {
+    return countryFlags[country] || '🌐';
+  }
+
+  // ---- Render Stars ----
+  function renderStars(rating) {
+    let html = '';
+    for (let i = 1; i <= 5; i++) {
+      html += `<span class="star${i > rating ? ' empty' : ''}">★</span>`;
+    }
+    return html;
+  }
+
+  // ---- Render Cards ----
+  let allData = [];
+  let activeFilter = 'all';
+
+  function renderCards(data) {
+    const grid = document.getElementById('grid');
+    grid.innerHTML = '';
+    const filtered = activeFilter === 'all'
+      ? data
+      : data.filter(d => d.country === activeFilter);
+
+    const countEl = document.getElementById('section-count');
+    if (countEl) countEl.textContent = filtered.length + ' testimonial' + (filtered.length !== 1 ? 's' : '');
+    if (filtered.length === 0) {
+      grid.innerHTML = `<div class="empty-state">No testimonials from this region yet.</div>`;
+      return;
+    }
+
+    filtered.forEach((item, i) => {
+      const card = document.createElement('div');
+      card.className = 'card';
+      card.style.animationDelay = `${i * 0.08}s`;
+      card.innerHTML = `
+        <div class="card-header">
+          <div class="stars">${renderStars(item.rating)}</div>
+          <div class="card-flag">${getFlag(item.country)}</div>
+        </div>
+        <div class="card-body">${item.review}</div>
+        <div class="card-footer">
+          <div class="card-info">
+            <div class="card-name">${item.name}</div>
+            <div class="card-role">${item.designation}</div>
+            <div class="card-uni">${item.university}</div>
+          </div>
+          <div class="card-country-badge">${getFlag(item.country)}<br>${item.country}</div>
+        </div>
+      `;
+      grid.appendChild(card);
+    });
+  }
+
+  // ---- Build Filters ----
+  function buildFilters(data) {
+    const countries = [...new Set(data.map(d => d.country))].sort();
+    const bar = document.getElementById('filter-bar');
+    bar.innerHTML = `<button class="filter-btn active" data-filter="all" onclick="setFilter('all',this)">All</button>`;
+    countries.forEach(c => {
+      const btn = document.createElement('button');
+      btn.className = 'filter-btn';
+      btn.dataset.filter = c;
+      btn.textContent = `${getFlag(c)} ${c}`;
+      btn.onclick = () => setFilter(c, btn);
+      bar.appendChild(btn);
+    });
+  }
+
+  function setFilter(f, btn) {
+    activeFilter = f;
+    document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    renderCards(allData);
+  }
+
+  // ---- Stats ----
+  function updateStats(data) {
+    const countries = new Set(data.map(d => d.country)).size;
+    const avg = data.reduce((s, d) => s + d.rating, 0) / data.length;
+    animateNumber('stat-total', data.length);
+    animateNumber('stat-countries', countries);
+    animateNumber('stat-avg', avg.toFixed(1), true);
+  }
+
+  function animateNumber(id, target, isFloat = false) {
+    const el = document.getElementById(id);
+    const end = parseFloat(target);
+    const duration = 1200;
+    const start = performance.now();
+    function step(now) {
+      const p = Math.min((now - start) / duration, 1);
+      const ease = 1 - Math.pow(1 - p, 3);
+      const val = end * ease;
+      el.textContent = isFloat ? val.toFixed(1) : Math.floor(val);
+      if (p < 1) requestAnimationFrame(step);
+      else el.textContent = isFloat ? end.toFixed(1) : Math.floor(end);
+    }
+    requestAnimationFrame(step);
+  }
+
+  // ---- Load JSON ----
+  async function loadTestimonials() {
+    try {
+      const res = await fetch('testimonials.json');
+      allData = await res.json();
+    } catch (e) {
+      // Fallback inline data if fetch fails (e.g. file:// protocol)
+      allData = [
+        { name: "Prof. Elena Marchetti", designation: "Professor of Astrophysics", university: "University of Bologna", country: "Italy", rating: 5, review: "This ceremony stands as a testament to the enduring power of academic excellence. I have attended symposiums across four continents, and none have matched the intellectual rigor and warm collegiality celebrated here." },
+        { name: "Prof. Hiroshi Tanaka", designation: "Dean of Engineering", university: "University of Tokyo", country: "Japan", rating: 5, review: "An extraordinary occasion that bridges disciplines and cultures. The caliber of scholarship recognized here reflects the highest ideals of global academia. I am honored to witness such a distinguished assembly." },
+        { name: "Prof. Amara Osei", designation: "Chair of Medical Sciences", university: "University of Ghana", country: "Ghana", rating: 5, review: "Few events capture the spirit of international academic cooperation as beautifully as this ceremony. Knowledge knows no borders, and our collective pursuit of truth is what elevates humanity." },
+        { name: "Prof. Svetlana Volkova", designation: "Professor of Mathematics", university: "Lomonosov Moscow State University", country: "Russia", rating: 4, review: "The organization and vision behind this ceremony are commendable. Bringing together scholars from such diverse fields and backgrounds to celebrate shared achievements is both rare and profoundly meaningful." },
+        { name: "Prof. Carlos Mendoza", designation: "Professor of Political Science", university: "National Autonomous University of Mexico", country: "Mexico", rating: 5, review: "A landmark event in the annals of scholarly recognition. The thoughtfulness with which each honoree has been selected speaks volumes about the committee's commitment to genuine academic contribution." },
+        { name: "Prof. Priya Nair", designation: "Professor of Cognitive Science", university: "Indian Institute of Science", country: "India", rating: 5, review: "I leave this ceremony deeply inspired. The recognition bestowed upon colleagues from across the world reaffirms that excellence is universal — precisely the platform that nurtures the next generation of scholars." }
+      ];
+    }
+    buildFilters(allData);
+    renderCards(allData);
+    updateStats(allData);
+  }
+
+  loadTestimonials();
+
+  // ---- Rating Stars ----
+  let selectedRating = 0;
+  document.querySelectorAll('.rating-star').forEach(star => {
+    star.addEventListener('mouseenter', () => highlightStars(+star.dataset.val));
+    star.addEventListener('mouseleave', () => highlightStars(selectedRating));
+    star.addEventListener('click', () => {
+      selectedRating = +star.dataset.val;
+      document.getElementById('f-rating').value = selectedRating;
+      highlightStars(selectedRating);
+    });
+  });
+
+  function highlightStars(n) {
+    document.querySelectorAll('.rating-star').forEach(s => {
+      s.classList.toggle('active', +s.dataset.val <= n);
+    });
+  }
+
+  // ---- Toast ----
+  function showToast(msg, type = 'success') {
+    const t = document.getElementById('toast');
+    t.textContent = msg;
+    t.className = `show ${type}`;
+    setTimeout(() => t.className = '', 3500);
+  }
+
+  // ---- Submit ----
+  async function sendReview() {
+    const name        = document.getElementById('f-name').value.trim();
+    const email       = document.getElementById('f-email').value.trim();
+    const designation = document.getElementById('f-designation').value.trim();
+    const university  = document.getElementById('f-university').value.trim();
+    const country     = document.getElementById('f-country').value.trim();
+    const rating      = +document.getElementById('f-rating').value;
+    const review      = document.getElementById('f-review').value.trim();
+
+    if (!name || !email || !designation || !university || !country || !rating || !review) {
+      showToast('Please complete all fields and select a rating.', 'error');
+      return;
+    }
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+      showToast('Please enter a valid email address.', 'error');
+      return;
+    }
+
+    const btn = document.getElementById('submit-btn');
+    btn.disabled = true;
+    btn.textContent = 'Sending…';
+
+    const starString = '★'.repeat(rating) + '☆'.repeat(5 - rating);
+
+    try {
+      await emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, {
+        to_email:    RECIPIENT_EMAIL,
+        from_name:   name,
+        from_email:  email,
+        designation: designation,
+        university:  university,
+        country:     country,
+        rating:      `${rating}/5  ${starString}`,
+        review:      review,
+      });
+      showToast('Your review has been submitted. Thank you, Professor.', 'success');
+      // Reset form
+      ['f-name','f-email','f-designation','f-university','f-country','f-review'].forEach(id => {
+        document.getElementById(id).value = '';
+      });
+      selectedRating = 0;
+      document.getElementById('f-rating').value = 0;
+      highlightStars(0);
+    } catch(err) {
+      console.error(err);
+      showToast('Submission failed. Please verify your EmailJS credentials.', 'error');
+    } finally {
+      btn.disabled = false;
+      btn.textContent = 'Submit Review';
+    }
+  }
+</script>
+</body>
+</html>
